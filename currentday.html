@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Day and Time</title>
+</head>
+
+<body>
+
+    <h2>Display the current Day and Time</h2>
+    <p id="day"></p>
+    <p id="time"></p>
+
+    <script>
+        var today = new Date();
+        var dayNumber = today.getDay();
+        var daylist = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        document.getElementById("day").innerHTML = "Today is: " + daylist[dayNumber] + ".";
+
+        var hour = today.getHours();
+        var minute = today.getMinutes();
+        var second = today.getSeconds();
+        var timeperiod = (hour >= 12) ? "PM" : "AM";
+
+        hour = (hour >= 12) ? hour - 12 : hour;
+
+        if (hour == 0 && timeperiod == 'PM') {
+            if (minute == 0 && second == 0) {
+                hour = 12;
+                timeperiod = 'Noon';
+            } else {
+                hour = 12;
+                timeperiod = 'PM';
+            }
+        }
+
+        if (hour === 0 && timeperiod === 'AM') {
+            if (minute === 0 && second === 0) {
+                hour = 12;
+                timeperiod = 'Midnight';
+            } else {
+                hour = 12;
+                timeperiod = 'AM';
+            }
+        }
+
+        // Format minutes and seconds with leading zeros
+        minute = (minute < 10) ? "0" + minute : minute;
+        second = (second < 10) ? "0" + second : second;
+
+        var timeString = "Current Time: " + hour + " " + timeperiod + " : " + minute + " : " + second;
+        console.log(timeString);
+        document.getElementById("time").innerHTML = timeString;
+    </script>
+</body>
+
+</html>
